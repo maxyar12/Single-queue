@@ -29,7 +29,7 @@ def stime():
     return np.random.normal(muS,sigma)
 
 #init stats
-maxqueuelength = 0
+maxqueuelength = 0 
 totalbusytime = 0
 S = 0 # sum customer response times for customers WHO HAVE DEPARTED
 Nd = 0 # total number of departures UP TO CURRENT simulation time
@@ -38,19 +38,19 @@ F = 0 # total number of customers who spend 4 minutes or more in system
 # initialization: note you can assume customer 1 shows up at clock = 0
 # and proceeds directly to service so schedule their dep, and next arrival
 # event_types - 0 is arrival, 1 means departure
-clock = 0
+CLOCK = 0   
 TE = 4500   # simulation END time
-LQ = 0 
-LS = 1
-numcustomers = 1 #total number of customers that have ENTERED system
-checkoutline = [] 
-FEL = [] 
+LQ = 0      # size of queue
+LS = 1      # server status 1 = busy , 0 = idle
+numcustomers = 1 # counter for number of customers entered
+checkoutline = []  # list of customers in system, yet to depart, both in queue and at counter
+FEL = []           # future event notice list
 
-checkoutline.append((customer(numcustomers,clock))) 
-FEL.append(eventnotice(1,stime(),numcustomers))
+checkoutline.append((customer(numcustomers,clock))) # update membership list
+FEL.append(eventnotice(1,stime(),numcustomers))     # insert departure event-notice into FEL
 
-numcustomers = numcustomers + 1
-FEL.append(eventnotice(0,atime(),numcustomers))
+numcustomers = numcustomers + 1                     # update counter
+FEL.append(eventnotice(0,atime(),numcustomers))     # insert arrival event-notice into FEL
 
 # -------MAIN PROGRAM ------------
 while clock < TE:
