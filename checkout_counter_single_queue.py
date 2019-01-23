@@ -2,8 +2,6 @@
 ''' time-advance- simple queue '''
 
 import numpy as np
-from operator import attrgetter
-import pprint
 
 # We will use unordered lists (arrays) and search for the event with
 # minimum time, this is not efficient for large systems but fine just
@@ -30,8 +28,6 @@ def stime():
     sigma = 0.6
     return np.random.normal(muS,sigma)
 
-stopcondition = 1000 # stop after 1000 customers depart
-
 #init stats
 maxqueuelength = 0
 totalbusytime = 0
@@ -43,6 +39,7 @@ F = 0 # total number of customers who spend 4 minutes or more in system
 # and proceeds directly to service so schedule their dep, and next arrival
 # event_types - 0 is arrival, 1 means departure
 clock = 0
+TE = 4500   # simulation END time
 LQ = 0 
 LS = 1
 numcustomers = 1 #total number of customers that have ENTERED system
@@ -56,7 +53,7 @@ numcustomers = numcustomers + 1
 FEL.append(eventnotice(0,atime(),numcustomers))
 
 # -------MAIN PROGRAM ------------
-while Nd < 100000:
+while clock < TE:
     #imminentevent =  min(FEL, key=attrgetter('futuretime'))
     FEL = sorted(FEL, key=lambda x: x.futuretime)
     IE = FEL.pop(0)
@@ -96,8 +93,8 @@ while Nd < 100000:
          
 #-------REPORT GENERATOR-----------------------
 print("U = ", totalbusytime/clock)
-print("S = ", S/100000) 
-print("F = ", F/100000)  
+print("S = ", S/Nd) 
+print("F = ", F/Nd)  
 print("MaxLinelength = ", maxqueuelength)        
 print("simulation run length = ", clock) 
 print("number of departures= ", Nd) 
