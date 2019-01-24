@@ -3,10 +3,8 @@
 
 import numpy as np
 
-# We will use unordered lists (arrays) and search for the event with
-# minimum time, this is not efficient for large systems but fine just
-# for working with most examples... we will discuss options for more
-# efficient simulations as well (ARENA, etc.)
+# We use arrays sorted by the lambda key attribute... we will discuss options for more
+# efficient simulations as well ( and ARENA, etc.)
 
 # define customers, eventnotice, and methods for random number generation
 class customer():
