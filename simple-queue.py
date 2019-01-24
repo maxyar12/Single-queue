@@ -55,7 +55,7 @@ def main():
     FEL.append(eventnotice(0,atime(),numcustomers))
     
     # -------MAIN PROGRAM ------------
-    while CLOCK < TE:                  #stop condition Nd departures
+    while CLOCK < TE:                  
         FEL = sorted(FEL, key=lambda x: x.futuretime)   # SORT THE FEL BY TIME
         IE = FEL.pop(0)                                 #GET THE IMMINENT EVENT
         advance = IE.futuretime - CLOCK                 # CHANGE IN TIME SINCE LAST EVENT
