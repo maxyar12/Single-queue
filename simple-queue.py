@@ -31,7 +31,7 @@ def stime():
 
 #init stats
 maxqueuelength = 0
-totalbusytime = 0
+B = 0
 S = 0 # sum customer response times for customers WHO HAVE DEPARTED
 Nd = 0 # total number of departures UP TO CURRENT simulation time
 F = 0 # total number of customers who spend 4 minutes or more in system
@@ -39,7 +39,7 @@ F = 0 # total number of customers who spend 4 minutes or more in system
 # initialization: note you can assume customer 1 shows up at CLOCK = 0
 # and proceeds directly to service so schedule their dep, and next arrival
 # event_types - 0 is arrival, 1 means departure
-TE = 4500      #when to stop simulation after this time (can use number of departures instead)
+TE = 1000000      #when to stop simulation after this time (can use number of departures instead)
 CLOCK = 0
 LQ = 0 
 LS = 1
@@ -55,17 +55,16 @@ FEL.append(eventnotice(0,atime(),numcustomers))
 
 # -------MAIN PROGRAM ------------
 while CLOCK < TE:                  #stop condition Nd departures
-    #imminentevent =  min(FEL, key=attrgetter('futuretime'))
-    FEL = sorted(FEL, key=lambda x: x.futuretime)
-    IE = FEL.pop(0)
-    advance = IE.futuretime - CLOCK
-    CLOCK = IE.futuretime
-    if IE.eventtype == 0:        #arrival logic
+    FEL = sorted(FEL, key=lambda x: x.futuretime)   # SORT THE FEL BY TIME
+    IE = FEL.pop(0)                                 #GET THE IMMINENT EVENT
+    advance = IE.futuretime - CLOCK                 # CHANGE IN TIME SINCE LAST EVENT
+    CLOCK = IE.futuretime                          # advance the CLOCK
+    if IE.eventtype == 0:                    #arrival logic
         if LS == 1:
             LQ = LQ + 1
             if LQ > maxqueuelength:
                 maxqueuelength = LQ
-            totalbusytime = totalbusytime + advance
+            B = B + advance
             checkoutline.append((customer(IE.customerid,CLOCK)))            
         else:
             LS = 1
@@ -76,24 +75,24 @@ while CLOCK < TE:                  #stop condition Nd departures
         FEL.append(eventnotice(0,CLOCK + atime(),numcustomers))
     
     else:                                     #departure logic
-        departing = next((x for x in checkoutline if x.customerid == IE.customerid), None) #inefficient search
+        departing = next((x for x in checkoutline if x.customerid == IE.customerid), None) # search for top of queue
         S = S + CLOCK - departing.arrivaltime
         Nd = Nd + 1
         if CLOCK - departing.arrivaltime >= 4:
             F = F + 1
         checkoutline.remove(departing)
-        totalbusytime = totalbusytime + advance
+        B = B + advance
         
         if LQ > 0:
             LQ = LQ - 1
-            checkoutline = sorted(checkoutline, key=lambda x: x.arrivaltime)  # don't worry about this
+            checkoutline = sorted(checkoutline, key=lambda x: x.arrivaltime)  # sort the queue
             firstinline = checkoutline[0]
             FEL.append(eventnotice(1,CLOCK + stime(),firstinline.customerid))
         else:
             LS = 0
          
 #-------REPORT GENERATOR-----------------------
-print("U = ", totalbusytime/CLOCK)
+print("U = ", B/CLOCK)
 print("S = ", S/Nd) 
 print("F = ", F/Nd)  
 print("MaxLinelength = ", maxqueuelength)        
