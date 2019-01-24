@@ -3,8 +3,8 @@
 
 import numpy as np
 
-# We use arrays sorted by the lambda key attribute... we will discuss options for more
-# efficient simulations as well ( and ARENA, etc.)
+# for the FEL, sets, we use arrays and sort by futuretime, arrival time attributes
+# more efficient simulations as well as high level (ARENA, etc.) options will be discussed in the course
 
 # define customers, eventnotice, and methods for random number generation
 class customer():
