@@ -32,7 +32,7 @@ def stime():
 def main():
     #init stats
     maxqueuelength = 0
-    B = 0
+    B = 0 # total server busy time
     S = 0 # sum customer response times for customers WHO HAVE DEPARTED
     Nd = 0 # total number of departures UP TO CURRENT simulation time
     F = 0 # total number of customers who spend 4 minutes or more in system
