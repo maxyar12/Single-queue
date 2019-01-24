@@ -12,7 +12,7 @@ List Operations
 
 As the textbook (Banks) points out, the best data structure for the future event-notice list is a dynamic linked list. This way insertion and deletion methods that preserve time ordering are O(1). My implementation here uses arrays and is much less efficient than the an optimal code. 
 
-I chose to use lambda sorting for time-ordering the FEL as this is easy to do in python. For this case, there can be a maximum of two events in the FEL so the lambda sorting is uneccessary and could simply be coded explicitly. However, using the lambda based attribute sort extends this code to possible uses where the FEL can contain a large number of notices.
+I chose to use lambda sorting for time-ordering the FEL as this is easy to do in python. For this case, there can be a maximum of two events in the FEL so the lambda sorting is uneccessary and could simply be coded explicitly. However, using the lambda based attribute sort extends this code to possible uses where the FEL can contain a large number of notices. It is used to sort the queue ( which is modeled as "checkoutline" after removing the customer currently being served (if any))
 
 Using the code
    This code runs pretty fast up to 1 million "minutes" of runtime. For example set TE = 1000000 and you should have a report generated in a few seconds. Different arrival distributions and parameters can bet set in the arrival time function atime() and the service time generation function stime().
