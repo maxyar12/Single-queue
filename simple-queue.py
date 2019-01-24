@@ -81,7 +81,6 @@ def main():
                 F = F + 1
             checkoutline.remove(departing)
             B = B + advance
-            
             if LQ > 0:
                 LQ = LQ - 1
                 checkoutline = sorted(checkoutline, key=lambda x: x.arrivaltime)  # sort the queue
