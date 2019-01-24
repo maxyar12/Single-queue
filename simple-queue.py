@@ -28,6 +28,7 @@ def stime():
     muS= 3.2
     sigma = 0.6
     return np.random.normal(muS,sigma)
+
 def main():
     #init stats
     maxqueuelength = 0
