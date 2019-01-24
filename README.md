@@ -6,7 +6,7 @@ Usage and Comments
 
 This code is mostly for pedalogical purposes following the arrival and departure logic from the textbook Discrete Event Simulation by Banks et. al. Therefore, variable names such as the future event-notice list (FEL), coincide with the names given in the textbook. This way I feel like the code may be more readable for students who read this textbook. 
 
-I believe that python is excellent for "quick and dirty" implementations of models. This code is based on that principle. However, it would be non-trivial (but possible) to extend this code to multiple lines (queueus) and servers. The main idea is to have a simple low-level implementation to be compared to the high level implementation in ARENA.
+I believe that python is excellent for "quick and dirty" implementations of models. This code is based on that principle. However, it would be non-trivial (but possible) to extend this code to multiple lines (queueus) and servers. The main idea is to have a simple low-level implementation to be compared to the high level implementation in ARENA. The textbook has a low-level Java implementation of the same problem, however, I feel that python is more accessible and easier to learn, at least for those who do not intend to work as professional software engineers, so I wrote the python version.
 
 List Operations
 
